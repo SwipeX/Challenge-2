@@ -7,6 +7,16 @@ Syntax is prefix notation, mostly modeled after LISP. Parenthesis surround each 
 (_operator_ _operands..._) 
 >Ex: (4 >> 10) - 4 + 5 would be written as: (+ 5 (- 4 (>> 4 10)))
 
+## Types
+
+All types are implied, and for the sake of simplicity, may not change during runtime. This means that a variable declared as `true` may not later be set to `5`.
+
+The types that exist are:
+
+- Number (32 bit IEEE float as backing type) [refer here](https://en.wikipedia.org/wiki/Single-precision_floating-point_format)
+- Boolean (true/false)
+- String (max length 255)
+
 ## Operators
 
 #### Math
@@ -74,14 +84,30 @@ Errors will be handled by printing to the console and halting program execution 
 The following code ```(multiply "hello" "world")``` in the most basic sense would print
 >Unexpected parameter type in function `multiply`, expected numeric value.
 
+Functions/Operators that expect a certain type should also error. For example:
+    
+    #declare var test as 77
+    (var test 77)
+    #set test to the negation of test
+    ($test !$test)
+
+Should produce an error, as the negate operator expects only boolean values. 
+
+
+## Entry point
+Similar to kotlin or javascript, code entry will start and finish at the first set of blank parenthesis. Refer to the below example for more context.
+
+This can occur anywhere in a file, and should produce an error if multiple entry points are found.
+
 
 ## Code Example
 ```
-#Simple recursive counter
+#simple recursive counter
 
 (var counter 0)
 (var max 0)
 
+#entry point
 (
     (print "Enter a max number: ")
     ($max readInNumber)

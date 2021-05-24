@@ -5,7 +5,8 @@
 
 Ultimately, the task is to get code from the language we made up, [chal](/chal.md), to run.
 
-> You may use any language that will compile via github actions. The due date will be 6/20 @ 11:59 PST. Submit by adding `SwipeX` to your private github repo and DM'ing Swipe the link to your repo (for association).
+> You may use any language that will compile via github actions. Because of this, benchmarks times will not affect grading.
+ The due date will be 6/20 @ 11:59 PST. Submit by adding `SwipeX` to your private github repo and DM'ing Swipe the link to your repo (for association).
 
 This task will be broken up into 3 main components, there may be other ways to achieve this, however the following methodology **will be required**.
 
@@ -25,7 +26,8 @@ The job of the processor is to execute the AST.
 
 ## Submission
 
-Your program must take in the path to a `.chal` file as an argument, and execute the program with the output being printed to the console.
+- Your program must take in the path to a `.chal` file as an argument, and execute the program with the output being printed to the console.
+- Your program must compile and release via github actions.
 
 ## Sample Code
 

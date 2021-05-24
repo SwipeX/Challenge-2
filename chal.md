@@ -58,16 +58,18 @@ The types that exist are:
 ---
 ## User Defined Functions
 >(Modulus 40 5) will call a defined function `Modulus` with the operands that follow (or error).
-### 1. Defining
+### Defining
 The syntax for defining functions is:
 
 `(fun name (operands...) (function body))`, IE `(fun incr(number amount) (+ number amount))`
 
 As always, whitespace is ignored so the body can be on a new line(s).
 
+Function names must start with an alpha character. `(fun 234 () ())` should throw a parse error.
+
 ---
 
-### 2. Referencing
+### Referencing
 
 The syntax for referencing a function is:
 
@@ -75,36 +77,38 @@ The syntax for referencing a function is:
 
 ---
 
-### 3. Variables
-Variables are global and may be declared anywhere that is not a code block. 
+## Variables
+Variables are global and may be declared anywhere that is not a code block.
+
+Variable names must start with an alpha character. `(var 234 0)` should throw a parse error.
 
 ---
 
-### 4. Defining
+### Defining
 The syntax for defining variables is:
 
 _(var name value)_, IE `(var counter 0)`
 
 ---
 
-### 5. Referencing
+### Referencing
 The syntax for referencing a variable as an operand is `$name`, IE `(add 5 $counter)`
 
 ---
 
-### 6. Setting values
+### Setting
 The syntax for setting a variable's value is `($name value)`, IE `($counter (divide 10 2))` would set counter to 5. Keep in mind this statement would return this value as well.
 
 ---
 
-### 7. Comments
+## Comments
 Comments can appear anywhere in code, and halt code processing until the next line. Comments are denoted by a leading '#'.
 
 ```#This is a comment```
 
 ---
 
-### 8. Error Handling
+## Error Handling
 Errors will be handled by printing to the console and halting program execution immediately.
 
 The following code ```(multiply "hello" "world")``` in the most basic sense would print

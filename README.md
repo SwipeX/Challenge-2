@@ -42,15 +42,17 @@ In order to reduce confusion, we are providing 5 code samples. If your project c
 (
     (print "Enter a max number: ")
     ($max (readInNumber))
-    (recursiveIncr counter max)
-    (print (append "Counter is at: " counter))
+    (recursiveIncr max)
+    (print (append "Counter is at: " $counter))
 )
 
-(fun recursiveIncr (counter max)
+(fun recursiveIncr ($counter max)
     (
-        if (equal counter max) 
-        counter
-        (recursiveIncr (++ counter) max)
+        (
+            if (equal $counter max) 
+            $counter
+            (recursiveIncr (++ $counter) max)
+        )
     )
 )
 ```
@@ -108,15 +110,56 @@ In order to reduce confusion, we are providing 5 code samples. If your project c
 )
 
 (fun test(param)) #no body defined
+(fun test(param) ()) #method with same name already exists
 ```
 
-### Functions & Vars
+### Fizzbuzz
 ```
-(var test 5)
+(var counter 0)
+(var max 100)
 
-(fun isFive(num) (if (equal num 5) true false))
-
+#entry point
 (
-    (print (if (isFive $test) "it was five" "nope, not five"))
+    (recursiveIncr $max)
+)
+
+(fun recursiveIncr (max)
+   (
+        (print (fizzbuzz counter))
+
+        (
+            if (equal $counter max) 
+            $counter
+            (recursiveIncr (++ $counter) max)
+        )
+    )
+)
+
+(fun fizzbuzz (value)
+    (
+        (if (equal (* 15 (/ 15 value)) value)
+            "Fizzbuzz"
+            (if (equal (* 5 (/ 5 value)) value)
+                "Buzz"
+                (if (equal (* 3 (/ 3 value)) value)
+                    "Fizz"
+                     value
+                )
+            )
+        )
+    )
 )
 ```
+
+### Whitespace
+```
+(  (--     (++         (<<             (>>                 (|                     (&                         (+ 5 
+                                                                  (- 7                                 (* 9 
+  (/ 10 2)                                )
+                            )                        )                    2)
+                5)          3)
+        2)      )
+)
+             )
+```
+(Yes, this should compile and run)

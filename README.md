@@ -1,106 +1,37 @@
-# chal-lang
+# RS-Hacking Challenge 2 
+## Prize Pool $500
+3 winners, first 50% ($250), second 35% ($175), third 25% ($125)
+### Want to win?
 
-## Syntax
+Ultimately, the task is to get code from the language we made up, [chal](/chal.md), to run.
 
-Syntax is prefix notation, mostly modeled after LISP. Parenthesis surround each operation, in which all elements are separated by whitespace. 
+> You may use any language that will compile via github actions. The due date will be 6/20 @ 11:59 PST. Submit by adding `SwipeX` to your private github repo and DM'ing Swipe the link to your repo (for association).
 
-(_operator_ _operands..._) 
->Ex: (4 >> 10) - 4 + 5 would be written as: (+ 5 (- 4 (>> 4 10)))
+This task will be broken up into 3 main components, there may be other ways to achieve this, however the following methodology **will be required**.
 
-## Types
+Note: You **MAY NOT** utilize any external libraries, only the standard library from the language of your choice.
 
-All types are implied, and for the sake of simplicity, may not change during runtime. This means that a variable declared as `true` may not later be set to `5`.
+### Parser
 
-The types that exist are:
+This component will take the text, along with the language syntax definition, and form a medium that can be translated into an AST. You may parse directly into the AST if you wish.
 
-- Number (32 bit IEEE float as backing type) [refer here](https://en.wikipedia.org/wiki/Single-precision_floating-point_format)
-- Boolean (true/false)
-- String (max length 255)
+### Abstract Syntax Tree
 
-## Operators
+For those who are not familiar, [refer here](https://en.wikipedia.org/wiki/Abstract_syntax_tree). You will design and create your own AST from the medium you created in the first step. 
 
-#### Math
-    add +
-    subtract -
-    multiply *
-    divide / 
-    exponent ^
-#### Unary
-    increment ++
-    decrement --
-    negate !
-#### Binary
-    shiftLeft <<
-    shiftRight >>
-    and &
-    or |
-#### Equality
-    equal ==
-    notEqual !=
-    greaterThan >
-    lessThan <
-#### String
-    charAt
-    removeAt
-    append
-    length
-    indexOf
-#### Functions
-    (if expression true false) -> evaluates @expression, and continues execution on true branch or false branch
-    (readInString) -> returns a string read from the console
-    (readInNumber) -> returns a number rad from the console
-    (print operand) -> prints a @operand to the console
-    (exit operand) -> exits the process with code @operand
-### User Defined Functions
->(Modulus 40 5) will call a defined function `Modulus` with the operands that follow (or error).
-##### Defining
-The syntax for defining functions is:
+### Processor
 
-_(fun name (operands...) (function body))_, IE `(fun incr(number amount) (+ number amount))`
+The job of the processor is to execute the AST.
 
-As always, whitespace is ignored so the body can be on a new line(s).
-##### Referencing
-The syntax for referencing a function is:
+## Submission
 
-`(incr 10 5)`, which using the function above, would return 15.
-### Variables
-Variables are global and may be declared either before code execution or after. 
+Your program must take in the path to a `.chal` file as an argument, and execute the program with the output being printed to the console.
 
-##### Defining
-The syntax for defining variables is:
+## Sample Code
 
-_(var name value)_, IE `(var counter 0)`
-##### Referencing
-The syntax for referencing a variable as an operand is `$name`, IE `(Add 5 $counter)`
-##### Setting values
-The syntax for setting a variable's value is `($name value)`, IE `($counter (divide 10 2))` would set counter to 5. Keep in mind this statement would return this value as well.
-### Comments
-Comments can appear anywhere in code, but end processing until the next newline. Comments are denoted by a leading '#'
+In order to reduce confusion, we are providing 5 code samples. If your project can correctly run all of these, you can consider it complete.
 
-```#This is a comment```
-### Error Handling
-Errors will be handled by printing to the console and halting program execution immediately.
-
-The following code ```(multiply "hello" "world")``` in the most basic sense would print
->Unexpected parameter type in function `multiply`, expected numeric value.
-
-Functions/Operators that expect a certain type should also error. For example:
-    
-    #declare var test as 77
-    (var test 77)
-    #set test to the negation of test
-    ($test !$test)
-
-Should produce an error, as the negate operator expects only boolean values. 
-
-
-## Entry point
-Similar to kotlin or javascript, code entry will start and finish at the first set of blank parenthesis. Refer to the below example for more context.
-
-This can occur anywhere in a file, and should produce an error if multiple entry points are found.
-
-
-## Code Example
+### Recursion
 ```
 #simple recursive counter
 
@@ -110,7 +41,7 @@ This can occur anywhere in a file, and should produce an error if multiple entry
 #entry point
 (
     (print "Enter a max number: ")
-    ($max readInNumber)
+    ($max (readInNumber))
     (recursiveIncr counter max)
     (print (append "Counter is at: " counter))
 )
@@ -121,5 +52,71 @@ This can occur anywhere in a file, and should produce an error if multiple entry
         counter
         (recursiveIncr (++ counter) max)
     )
+)
+```
+### Math/Unary/Binary
+```
+(
+  (-- 
+    (++ 
+        (<< 
+            (>> 
+                (| 
+                    (& 
+                        (+ 5 
+                            (- 7 
+                                (* 9 
+                                    (/ 10 2)
+                                )
+                            )
+                        )
+                    2)
+                5)
+            3)
+        2)
+      )
+   )
+)
+```
+
+### String
+```
+(var str "rshacking")
+
+#entry point
+(
+    (print (charAt $str 0)) #r
+    (print (removeAt $str 0)) #shacking
+    (print (append $str "test")) #shackingtest
+    (print (length $str)) #12
+    (print (indexOf $str "g") #7 
+)
+```
+### Errors
+```
+(var print 0) #default function name
+(var 0 0) #variable name cannot be a number
+
+(
+    (print 0.5) #no error here
+    (print "this" "should" "fail") #too many arguments supplied
+)
+
+#second entry point
+(
+    (print "whoops")
+)
+
+(fun test(param)) #no body defined
+```
+
+### Functions & Vars
+```
+(var test 5)
+
+(fun isFive(num) (if (equal num 5) true false))
+
+(
+    (print (if (isFive $test) "it was five" "nope, not five"))
 )
 ```

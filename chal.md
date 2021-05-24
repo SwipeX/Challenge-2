@@ -6,6 +6,7 @@ Syntax is prefix notation, mostly modeled after LISP. Parenthesis surround each 
 
 (_operator_ _operands..._) 
 >Ex: (4 >> 10) - 4 + 5 would be written as: (+ 5 (- 4 (>> 4 10)))
+---
 
 ## Types
 
@@ -16,6 +17,7 @@ The types that exist are:
 - Number (32 bit IEEE float as backing type) [refer here](https://en.wikipedia.org/wiki/Single-precision_floating-point_format)
 - Boolean (true/false)
 - String (max length 255)
+---
 
 ## Operators
 
@@ -52,34 +54,57 @@ The types that exist are:
     (readInNumber) -> returns a number rad from the console
     (print operand) -> prints a @operand to the console
     (exit operand) -> exits the process with code @operand
-### User Defined Functions
+
+---
+## User Defined Functions
 >(Modulus 40 5) will call a defined function `Modulus` with the operands that follow (or error).
-##### Defining
+### 1. Defining
 The syntax for defining functions is:
 
-_(fun name (operands...) (function body))_, IE `(fun incr(number amount) (+ number amount))`
+`(fun name (operands...) (function body))`, IE `(fun incr(number amount) (+ number amount))`
 
 As always, whitespace is ignored so the body can be on a new line(s).
-##### Referencing
+
+---
+
+### 2. Referencing
+
 The syntax for referencing a function is:
 
 `(incr 10 5)`, which using the function above, would return 15.
-### Variables
+
+---
+
+### 3. Variables
 Variables are global and may be declared anywhere that is not a code block. 
 
-##### Defining
+---
+
+### 4. Defining
 The syntax for defining variables is:
 
 _(var name value)_, IE `(var counter 0)`
-##### Referencing
+
+---
+
+### 5. Referencing
 The syntax for referencing a variable as an operand is `$name`, IE `(add 5 $counter)`
-##### Setting values
+
+---
+
+### 6. Setting values
 The syntax for setting a variable's value is `($name value)`, IE `($counter (divide 10 2))` would set counter to 5. Keep in mind this statement would return this value as well.
-### Comments
+
+---
+
+### 7. Comments
 Comments can appear anywhere in code, and halt code processing until the next line. Comments are denoted by a leading '#'.
 
 ```#This is a comment```
-### Error Handling
+
+---
+
+### 8. Error Handling
 Errors will be handled by printing to the console and halting program execution immediately.
 
 The following code ```(multiply "hello" "world")``` in the most basic sense would print
@@ -94,12 +119,14 @@ Functions/Operators that expect a certain type should also error. For example:
 
 Should produce an error, as the negate operator expects only boolean values. 
 
+---
 
 ## Entry point
 Similar to kotlin or javascript, code entry will start and finish at the first set of blank parenthesis. Refer to the below example for more context.
 
 This can occur anywhere in a file, and should produce an error if multiple entry points are found.
 
+---
 
 ## Code Example
 ```

@@ -44,16 +44,16 @@ In order to reduce confusion, we are providing 5 code samples. If your project c
 (
     (print "Enter a max number: ")
     ($max (readInNumber))
-    (recursiveIncr max)
+    (recursiveIncr $counter $max)
     (print (append "Counter is at: " $counter))
 )
 
-(fun recursiveIncr ($counter max)
+(fun recursiveIncr (counter max)
     (
         (
-            if (equal $counter max) 
-            $counter
-            (recursiveIncr (++ $counter) max)
+            if (equal counter max) 
+            counter
+            (recursiveIncr (++ counter) max)
         )
     )
 )
@@ -118,16 +118,15 @@ In order to reduce confusion, we are providing 5 code samples. If your project c
 ### Fizzbuzz
 ```
 (var counter 0)
-(var max 100)
 
 #entry point
 (
-    (recursiveIncr $max)
+    (recursiveIncr 100)
 )
 
 (fun recursiveIncr (max)
    (
-        (print (fizzbuzz counter))
+        (print (fizzbuzz $counter))
 
         (
             if (equal $counter max) 

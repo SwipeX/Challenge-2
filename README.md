@@ -93,7 +93,7 @@ In order to reduce confusion, we are providing 5 code samples. If your project c
     (print (removeAt $str 0)) #shacking
     (print (append $str "test")) #shackingtest
     (print (length $str)) #12
-    (print (indexOf $str "g") #7 
+    (print (indexOf $str "g")) #7 
 )
 ```
 ### Errors

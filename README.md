@@ -1,5 +1,5 @@
 # RS-Hacking Challenge 2 
-## Prize Pool $500
+## Prize Pool $550
 3 winners, first 50% ($250), second 35% ($175), third 25% ($125)
 ### Want to win?
 
